@@ -10,7 +10,8 @@ const db = require("./models");
 const app = express();
 
 app.use(logger("dev"));
-
+app.use(require("./routes/apiRoutes"))
+app.use(require("./routes/homeRoutes"))
 //set up express middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -21,17 +22,25 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout", {
   useNewUrlParser: true,
 });
 
-// HTML routes
-
-//route to get index.html
-
-//route to get exercise.html
-
-//API routes
-
-//route to post form submission to mongoDB via mongoose
 
 //route to get stats.html populated w/data
+//move to api routes later
+app.get("/stats", (req, res) => {
+  try {
+     db.Workout.find({})
+      .then((dbWorkouts) => {
+        res.json(dbWorkouts);
+      })
+      .catch((err) => {
+        res.json(err);
+      });
+    
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+//route to post form submission to mongoDB via mongoose
 
 //start server
 app.listen(PORT, () => {
