@@ -17,14 +17,13 @@ app.use(express.json());
 
 app.use(express.static("public"));
 
-mongoose.connect(
-  process.env.MONGODB_URI || "mongodb://localhost/workouttrackerdb",
-  { useNewUrlParser: true }
-);
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout", {
+  useNewUrlParser: true,
+});
 
 // HTML routes
 
-//Route to get index.html
+//route to get index.html
 
 //route to get exercise.html
 
