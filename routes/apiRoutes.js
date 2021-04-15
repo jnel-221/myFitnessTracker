@@ -14,6 +14,7 @@ router.get("/api/workouts", (req, res) => {
     .sort({ day: -1 })
     .limit(1)
     .then((dbWorkouts) => {
+      console.log("where's my stuff?",dbWorkouts);
       res.json(dbWorkouts);
     })
     .catch((err) => {
@@ -29,8 +30,9 @@ router.get("/api/workouts/range", (req, res) => {
         totalDuration: { $sum: "$exercises.duration" },
       },
     },
-  ]).sort({day: 1}).limit(7)
+  ]).sort({day: -1}).limit(8)
     .then((dbWorkouts) => {
+      console.log("where's all my stuff?",dbWorkouts)
       res.json(dbWorkouts);
     })
     .catch((err) => {
