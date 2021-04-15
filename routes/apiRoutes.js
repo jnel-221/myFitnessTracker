@@ -1,9 +1,10 @@
 const router = require("express").Router();
-const db = require("../models");
+const { Workout } = require("../models");
+// const db = require("../models");
 
 //get all workoutes for main page display
 router.get("/api/workouts", (req, res) => {
-  db.Workout.find({})
+  Workout.find({})
     .then((dbWorkouts) => {
       res.json(dbWorkouts);
     })
@@ -14,7 +15,7 @@ router.get("/api/workouts", (req, res) => {
 
 //get all workouts for dashboard display
 router.get("/api/workouts/range", (req, res) => {
-  db.Workout.find({})
+  Workout.find({})
     .then((dbWorkouts) => {
       res.json(dbWorkouts);
     })
@@ -23,22 +24,33 @@ router.get("/api/workouts/range", (req, res) => {
     });
 });
 
-//create new workout; route is buggy; new workouts don't have stats
-router.post("/api/workouts", (req, res) => {
-//   console.log(req.body);
-  db.Workout.create({})
-    .then((newExercise) => {
-      res.json(newExercise);
+//creates new workout; is empty 
+router.post("/api/workouts/", ({ body }, res) => {
+  const workout = new Workout(body);
+
+  Workout.create(workout)
+    .then((workout) => {
+      res.json(workout);
     })
     .catch((err) => {
-      res.status(400).json(err);
+      res.json(err);
     });
 });
 
-//add workout session; 
+//updates workout data but currently sends empty exercise array.
 router.put("/api/workouts/:id", (req, res) => {
-  console.log(req.params.id);
-
+  console.log("looking at put route in API",req.body);
+  Workout.findByIdAndUpdate(
+    { _id: req.params.id },
+    { $push: { exercises: req.body } },
+    { new: true }
+  )
+    .then((Workout) => {
+      res.json(Workout);
+    })
+    .catch((err) => {
+      res.json(err);
+    });
 });
 
 module.exports = router;
