@@ -2,9 +2,17 @@ const router = require("express").Router();
 const { Workout } = require("../models");
 // const db = require("../models");
 
-//get all workoutes for main page display
+//get all workoutes for main page display; needs to have duration function here
 router.get("/api/workouts", (req, res) => {
-  Workout.find({})
+  console.log(res.body);
+  console.log(res.json);
+  Workout.aggregate([
+    {
+      $addFields: {
+        totalDuration: { $sum: '$exercises.duration' },
+      },
+    },
+  ]).sort({day:-1}).limit(1)
     .then((dbWorkouts) => {
       res.json(dbWorkouts);
     })
@@ -24,7 +32,7 @@ router.get("/api/workouts/range", (req, res) => {
     });
 });
 
-//creates new workout; is empty 
+//creates new workout
 router.post("/api/workouts", ({ body }, res) => {
   const workout = new Workout(body);
 
@@ -39,7 +47,6 @@ router.post("/api/workouts", ({ body }, res) => {
 
 //add exercise data to workout
 router.put("/api/workouts/:id", (req, res) => {
-  console.log("looking at put route in API",req.body);
   Workout.findByIdAndUpdate(
     { _id: req.params.id },
     { $push: { exercises: req.body } },
