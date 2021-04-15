@@ -25,7 +25,7 @@ router.get("/api/workouts/range", (req, res) => {
 });
 
 //creates new workout; is empty 
-router.post("/api/workouts/", ({ body }, res) => {
+router.post("/api/workouts", ({ body }, res) => {
   const workout = new Workout(body);
 
   Workout.create(workout)
@@ -37,7 +37,7 @@ router.post("/api/workouts/", ({ body }, res) => {
     });
 });
 
-//updates workout data but currently sends empty exercise array.
+//add exercise data to workout
 router.put("/api/workouts/:id", (req, res) => {
   console.log("looking at put route in API",req.body);
   Workout.findByIdAndUpdate(
@@ -46,6 +46,7 @@ router.put("/api/workouts/:id", (req, res) => {
     { new: true }
   )
     .then((Workout) => {
+      console.log(Workout);
       res.json(Workout);
     })
     .catch((err) => {

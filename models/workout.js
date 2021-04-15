@@ -14,45 +14,35 @@ const WorkoutSchema = new Schema({
         trim: true,
         required: "Is this cardio or resistance training?",
       },
-    },
-    {
       name: {
         type: String,
         trim: true,
         required: "What is the name of your workout?",
       },
-    },
-    {
+      duration: {
+        type: Number,
+        trim: true,
+      },
       weight: {
         type: Number,
         trim: true,
       },
-    },
-    {
       sets: {
         type: Number,
         trim: true,
       },
-    },
-    {
+
       reps: {
         type: Number,
         trim: true,
       },
-    },
-    {
+
       distance: {
         type: Number,
         trim: true,
       },
     },
-    {
-      durataion: {
-        type: Number,
-        trim: true,
-      },
-    },
-]
+  ],
 });
 
 const Workout = mongoose.model("Workout", WorkoutSchema);
