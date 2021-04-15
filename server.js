@@ -17,14 +17,15 @@ app.use(express.static("public"));
 
 //set up db & mongoose
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout", {
-  useUnifiedTopology: true,
   useNewUrlParser: true,
-  useFindAndModify: false
+  useUnifiedTopology: true,
+  useCreateIndex: true,
+  useFindAndModify: false,
 });
 
 //pull in routing
-app.use(require("./routes/apiRoutes"))
-app.use(require("./routes/homeRoutes"))
+app.use(require("./routes/apiRoutes"));
+app.use(require("./routes/homeRoutes"));
 
 //start server
 app.listen(PORT, () => {
