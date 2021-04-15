@@ -30,8 +30,8 @@ router.get("/api/workouts/range", (req, res) => {
       },
     },
   ])
-    .sort({ day: -1 })
-    .limit(8)
+    .sort({ day: 1})
+    .limit(10)
     .then((dbWorkouts) => {
       res.json(dbWorkouts);
     })
