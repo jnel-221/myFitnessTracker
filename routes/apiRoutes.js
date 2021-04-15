@@ -9,10 +9,12 @@ router.get("/api/workouts", (req, res) => {
   Workout.aggregate([
     {
       $addFields: {
-        totalDuration: { $sum: '$exercises.duration' },
+        totalDuration: { $sum: "$exercises.duration" },
       },
     },
-  ]).sort({day:-1}).limit(1)
+  ])
+    .sort({ day: -1 })
+    .limit(1)
     .then((dbWorkouts) => {
       res.json(dbWorkouts);
     })
@@ -23,7 +25,13 @@ router.get("/api/workouts", (req, res) => {
 
 //get all workouts for dashboard display
 router.get("/api/workouts/range", (req, res) => {
-  Workout.find({})
+  Workout.aggregate([
+    {
+      $addFields: {
+        totalDuration: { $sum: "$exercises.duration" },
+      },
+    },
+  ]).sort({day: 1}).limit(7)
     .then((dbWorkouts) => {
       res.json(dbWorkouts);
     })
