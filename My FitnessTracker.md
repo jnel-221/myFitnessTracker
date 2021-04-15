@@ -1,4 +1,4 @@
-# myFitnessTracker# My FitnessTracker
+# My FitnessTracker
 
   ## Badge
 
@@ -7,7 +7,7 @@
   ## Description
 
   An application for tracking your daily fitness routine!
-  ![screenshot](./Develop/assets/dashboard.png)
+  
   ## Table of Contents
   
   - [Installation](#Installation)
@@ -29,8 +29,6 @@
   ## Usage
 
   In your console/terminal, run the command npm i to install dependencis.  Next (optional) run 'npm run seed' to seed the database.  Finally, run NPM start to start the server and run the application in your local environment!
-
-![fitnessapp gif](./Develop/assets/trackerApp.gif)
 
   [Back to Table of Contents](#table-of-contents)
   
