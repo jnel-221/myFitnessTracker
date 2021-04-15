@@ -4,8 +4,6 @@ const { Workout } = require("../models");
 
 //get all workoutes for main page display; needs to have duration function here
 router.get("/api/workouts", (req, res) => {
-  console.log(res.body);
-  console.log(res.json);
   Workout.aggregate([
     {
       $addFields: {

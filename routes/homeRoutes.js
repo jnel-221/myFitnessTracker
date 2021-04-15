@@ -6,8 +6,12 @@ router.get("/exercise", (req, res) =>
   res.sendFile(path.join(__dirname, "../public/exercise.html"))
 );
 //route for stats
-router.get("/stats", (req, res) => 
-res.sendFile(path.join(__dirname, "../public/stats.html")));
+router.get("/stats", (req, res) =>
+  res.sendFile(path.join(__dirname, "../public/stats.html"))
+);
 //route for index
+router.get("/", (req, res) =>
+  res.sendFile(path.join(__dirname, "../public/index.html"))
+);
 
 module.exports = router;
