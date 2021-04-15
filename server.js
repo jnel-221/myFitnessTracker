@@ -9,19 +9,22 @@ const app = express();
 
 app.use(logger("dev"));
 
-app.use(require("./routes/apiRoutes"))
-app.use(require("./routes/homeRoutes"))
 //set up express middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.use(express.static("public"));
 
+//set up db & mongoose
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout", {
   useUnifiedTopology: true,
   useNewUrlParser: true,
   useFindAndModify: false
 });
+
+//pull in routing
+app.use(require("./routes/apiRoutes"))
+app.use(require("./routes/homeRoutes"))
 
 //start server
 app.listen(PORT, () => {
