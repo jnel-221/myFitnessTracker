@@ -7,6 +7,9 @@
   ## Description
 
   An application for tracking your daily fitness routine!
+
+View the deployed app [here](https://shrouded-retreat-52814.herokuapp.com/)!
+
   ![screenshot](./Develop/assets/dashboard.png)
   ## Table of Contents
   
