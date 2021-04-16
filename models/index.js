@@ -1,4 +1,4 @@
 //will hold models
 module.exports = {
-  Workout: require("./Workout"),
+  Workout: require("./Workout.js"),
 };
