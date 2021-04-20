@@ -3,7 +3,7 @@ const express = require("express");
 const logger = require("morgan");
 const mongoose = require("mongoose");
 require('dotenv').config();
-const PORT = process.env.port || 3030;
+const PORT = process.env.PORT || 3030;
 
 const app = express();
 
